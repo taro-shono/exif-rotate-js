@@ -38,7 +38,7 @@ See `lib/configs.js`
 
 #### file_id
 - Type: string
-- Default: null
+- Default: file_image
 
 #### max_size
 - Type: number
