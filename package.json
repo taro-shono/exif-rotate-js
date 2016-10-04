@@ -1,6 +1,6 @@
 {
   "name": "exif-rotate-js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Simple use file API. You can use input file, show preview images.",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "exif"
   ],
   "author": "hanagejet",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "exif-js": "^2.1.1"
   },
