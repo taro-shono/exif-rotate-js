@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "defaults",
+    "./linters/override.js"
+  ]
+}
