@@ -9,9 +9,9 @@ export default class Rotate {
         const reader = new FileReader();
         reader.onload = (e) => {
           setImage(e.target.result);
-        }
+        };
         reader.readAsDataURL(e.target.files[index]);
       });
-    }
+    };
   }
 }

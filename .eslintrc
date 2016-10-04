@@ -1,6 +1,6 @@
 {
   "extends": [
-    "defaults",
+    "airbnb-base",
     "./linters/override.js"
   ]
 }

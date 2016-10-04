@@ -4,8 +4,10 @@
   "description": "Simple use file API. You can use input file, show preview images.",
   "main": "lib/index.js",
   "scripts": {
-    "start": "babel src --out-dir lib && webpack --watch",
-    "build": "babel src --out-dir lib",
+    "start": "webpack --watch",
+    "babel": "babel src --out-dir lib",
+    "linter": "eslint --ignore-path .gitignore src/",
+    "build": "npm run babel && npm run linter",
     "prepublish": "npm run build"
   },
   "keywords": [
@@ -21,8 +23,12 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-config-airbnb-base": "^8.0.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-loader": "^1.5.0",
+    "eslint-plugin-import": "^2.0.0",
+    "watch": "^0.19.2",
     "webpack": "^1.13.2"
   }
 }

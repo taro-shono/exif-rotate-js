@@ -1,5 +1,5 @@
-import { max_size } from './configs/size';
 import EXIF from 'exif-js';
+import { max_size } from './configs/size';
 
 export default class Helper {
   /**
@@ -26,7 +26,7 @@ export default class Helper {
       rotateFromOrientation(orientation, img, ctx, canvas);
 
       appendNewImage(canvas);
-    }
+    };
     img.src = result_reader;
   }
 
@@ -107,12 +107,13 @@ export default class Helper {
         ctx.rotate(0.5 * Math.PI);
         ctx.scale(1, -1);
         break;
-      case 6:
+      case 6: {
         // 90° rotate right
         ctx.rotate(0.5 * Math.PI);
         ctx.translate(0, -canvas.height);
         const img_ratio = (img.re_height / img.re_width) - 1;
         ctx.drawImage(img, 0, canvas.width * img_ratio, canvas.height, canvas.width);
+      }
         break;
       case 7:
         // horizontal flip + 90 rotate right
@@ -126,6 +127,8 @@ export default class Helper {
         ctx.translate(-canvas.width, 0);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         break;
+      default:
+        break;
     }
   }
 }
@@ -135,5 +138,5 @@ export const {
   getOrientation,
   canvasResizeAndDrawImage,
   rotateFromOrientation,
-  appendNewImages
+  appendNewImages,
 } = Helper;
