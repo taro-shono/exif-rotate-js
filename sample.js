@@ -1,3 +1,3 @@
-import Rotate from './lib/rotate';
+import ExifRotate from './lib/exif-rotate';
 
-Rotate.changeFile('file_image');
+ExifRotate.onChangeFile('file_image');

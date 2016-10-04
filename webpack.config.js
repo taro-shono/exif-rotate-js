@@ -2,7 +2,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    index: './src/rotate.js',
+    'exif-rotate': './src/exif-rotate.js',
     sample: './sample.js',
   },
 

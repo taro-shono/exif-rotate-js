@@ -1,13 +1,13 @@
 import { setImage } from './helper';
 
-export default class Rotate {
+export default class ExifRotate {
   /**
   *  @param options {object}
   *  elem_id: string
   *  max_size: number
   *  container_id: string
   */
-  static changeFile(options = {}) {
+  static onChangeFile(options = {}) {
     const elem = document.getElementById(options.elem_id);
 
     elem.onchange = (e) => {

@@ -14,8 +14,8 @@ npm install exif-rotate-js
 ```
 
 ```js
-var Rotate = require('exif-rotate-js');
-Rotate.changeFile('{file_elem_id}');
+var ExifRotate = require('exif-rotate-js');
+ExifRotate.onChangeFile('{file_elem_id}');
 ```
 
 ```html
