@@ -138,5 +138,5 @@ export const {
   getOrientation,
   canvasResizeAndDrawImage,
   rotateFromOrientation,
-  appendNewImages,
+  appendNewImage,
 } = Helper;
