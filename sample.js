@@ -1,3 +1,5 @@
 import ExifRotate from './lib/exif-rotate';
 
-ExifRotate.onChangeFile('file_image');
+ExifRotate.onChangeFile({
+  file_id: 'file_image',
+});

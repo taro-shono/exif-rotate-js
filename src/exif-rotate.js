@@ -1,4 +1,5 @@
 import { setImage } from './helper';
+import { file_id } from './configs';
 
 export default class ExifRotate {
   /**
@@ -8,7 +9,8 @@ export default class ExifRotate {
   *  container_id: string
   */
   static onChangeFile(options = {}) {
-    const elem = document.getElementById(options.elem_id);
+    const id = options.file_id ? options.file_id : file_id;
+    const elem = document.getElementById(id);
 
     elem.onchange = (e) => {
       Object.keys(e.target.files).forEach((index) => {

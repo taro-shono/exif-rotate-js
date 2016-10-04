@@ -1,11 +1,12 @@
 # exif-rotate-js
 
-Simple use file API. You can use input file, show preview images.
+When you use input file, you can see preview images.
 
 ## WHAT'S THIS MODULE
 
 - preview on file upload images.
-- use file API correct to mobile.
+- use file API, correct to mobile.
+- resize image's file size and size.
 
 ## HOW IT'S WORKS
 
@@ -15,7 +16,7 @@ npm install exif-rotate-js
 
 ```js
 var ExifRotate = require('exif-rotate-js');
-ExifRotate.onChangeFile('{file_elem_id}');
+ExifRotate.onChangeFile('{options}');
 ```
 
 ```html
@@ -27,9 +28,22 @@ ExifRotate.onChangeFile('{file_elem_id}');
 
 | Name          | Argument | Description   |
 | ------------- |:--------:|:-------------:|
-| ChangeFile    | String   | Preview images. |
+| onChangeFile  | Object   | Preview images. Setting Options |
 
-## FEATURED
+## OPTIONS
 
-- edit `#container` id name
-- write max image size
+See `lib/configs.js`
+
+### onChangeFile
+
+#### elem_id
+- Type: string
+- Default: null
+
+#### max_size
+- Type: number
+- Default: 720
+
+#### container_id
+- Type: string
+- Default: container
