@@ -1,7 +1,7 @@
 {
   "name": "exif-rotate-js",
   "version": "0.0.8",
-  "description": "",
+  "description": "Simple use file API. You can use input file, show preview images.",
   "main": "lib/index.js",
   "scripts": {
     "start": "babel src --out-dir lib && webpack --watch",
