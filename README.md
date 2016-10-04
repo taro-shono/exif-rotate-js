@@ -36,7 +36,7 @@ See `lib/configs.js`
 
 ### onChangeFile
 
-#### elem_id
+#### file_id
 - Type: string
 - Default: null
 
@@ -44,6 +44,6 @@ See `lib/configs.js`
 - Type: number
 - Default: 720
 
-#### container_id
+#### default_container_id
 - Type: string
 - Default: container
