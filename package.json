@@ -1,6 +1,6 @@
 {
   "name": "exif-rotate-js",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "When you use input file, you can see preview images.",
   "main": "lib/exif-rotate.js",
   "scripts": {

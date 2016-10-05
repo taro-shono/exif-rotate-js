@@ -16,34 +16,39 @@ npm install exif-rotate-js
 
 ```js
 var ExifRotate = require('exif-rotate-js');
-ExifRotate.onChangeFile('{options}');
+ExifRotate.showPreviewImage(img, {
+  max_size: 700,
+});
 ```
 
+👆show detail `sample.js`
+
 ```html
-<div id="container">{here_is_uploaded_images}</div>
-<input type="file" id="{file_elem_id}" multiple>
+<div id="{options.default_container_id}">
+  here is uploaded images
+</div>
+<input type="file" id="#sum_id" multiple> <!-- can use multiple -->
 ```
 
 ## METHODS
 
 | Name          | Argument | Description   |
 | ------------- |:--------:|:-------------:|
-| onChangeFile  | Object   | Preview images. Setting Options |
+| showPreviewImage  | img, Object   | Preview images |
+| getBase64String   | img, Object   | Got encoding base 64 string |
 
 ## OPTIONS
 
 See `lib/configs.js`
 
-### onChangeFile
-
-#### file_id
-- Type: string
-- Default: file_image
-
-#### max_size
+### max_size
 - Type: number
 - Default: 720
 
-#### default_container_id
+This is max image size.
+
+### default_container_id
 - Type: string
 - Default: container
+
+This is container element id.
