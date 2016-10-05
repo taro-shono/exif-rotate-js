@@ -1,25 +1,26 @@
-import { setImage } from './helper';
-import { file_id } from './configs';
+import { setCanvas, appendNewImage } from './helper';
 
 export default class ExifRotate {
   /**
+  *  @param img {elem}
   *  @param options {object}
-  *  elem_id: string
-  *  max_size: number
-  *  container_id: string
   */
-  static onChangeFile(options = {}) {
-    const id = options.file_id ? options.file_id : file_id;
-    const elem = document.getElementById(id);
+  static showPreviewImage(img, options = {}) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    setCanvas(img, canvas, ctx, options);
+    appendNewImage(canvas, options);
+  }
 
-    elem.onchange = (e) => {
-      Object.keys(e.target.files).forEach((index) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          setImage(e.target.result, options);
-        };
-        reader.readAsDataURL(e.target.files[index]);
-      });
-    };
+  /**
+  *  @param img {elem}
+  *  @param options {object}
+  *  @return base 64 data url {string}
+  */
+  static getBase64String(img, options = {}) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    setCanvas(img, canvas, ctx, options);
+    return canvas.toDataURL('image/jpeg');
   }
 }

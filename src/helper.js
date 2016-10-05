@@ -3,34 +3,27 @@ import { max_size, default_container_id } from './configs';
 
 export default class Helper {
   /**
-  *  @param result_reader {string} base64 の string
+  *  @param img {elem}
+  *  @param canvas {elem}
+  *  @param ctx {canvas obj}
+  *  @param options {object}
   */
-  static setImage(result_reader, options) {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      img.re_width = img.width;
-      img.re_height = img.height;
+  static setCanvas(img, canvas, ctx, options) {
+    img.re_width = img.width;
+    img.re_height = img.height;
+    const orientation = getOrientation(img);
+    if (orientation === 6) {
+      // 縦画像だった場合スマートフォンでは幅・高さは横画像と認識されるため、 width height を手動で入れ替える必要あり
+      img.re_height = img.width;
+      img.re_width = img.height;
+    }
 
-      const orientation = getOrientation(img);
-
-      if (orientation === 6) {
-        // 縦画像だった場合スマートフォンでは幅・高さは横画像と認識されるため、 width height を手動で入れ替える必要あり
-        img.re_height = img.width;
-        img.re_width = img.height;
-      }
-
-      canvasResizeAndDrawImage(img, canvas, ctx, options);
-
-      rotateFromOrientation(orientation, img, ctx, canvas);
-
-      appendNewImage(canvas, options);
-    };
-    img.src = result_reader;
+    canvasResizeAndDrawImage(img, canvas, ctx, options);
+    rotateFromOrientation(orientation, img, ctx, canvas);
   }
 
   /**
+  *  draw image on canvas
   *  @param img {elem}
   *  @param canvas {elem}
   *  @param ctx {canvas obj}
@@ -56,6 +49,7 @@ export default class Helper {
   }
 
   /**
+  *  get orientation for mobile
   *  @param img {elem}
   */
   static getOrientation(img) {
@@ -67,7 +61,7 @@ export default class Helper {
   }
 
   /**
-  *  #container に append
+  *  append container
   *  @param canvas {elem}
   */
   static appendNewImage(canvas, options) {
@@ -137,7 +131,7 @@ export default class Helper {
 }
 
 export const {
-  setImage,
+  setCanvas,
   getOrientation,
   canvasResizeAndDrawImage,
   rotateFromOrientation,
