@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hanagejet/exif-rotate-js.svg?branch=master)](https://travis-ci.org/hanagejet/exif-rotate-js)
+
 # exif-rotate-js
 
 When you use input file, you can see preview images.

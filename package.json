@@ -8,6 +8,7 @@
     "babel": "babel src --out-dir lib",
     "linter": "eslint --ignore-path .gitignore src/",
     "build": "npm run babel && npm run linter",
+    "test": "npm run linter",
     "prepublish": "npm run build"
   },
   "keywords": [
