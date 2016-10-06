@@ -1,4 +1,4 @@
-import { setCanvas, appendNewImage } from './helper';
+import { setCanvas, appendNewImage } from './helper'
 
 export default class ExifRotate {
   /**
