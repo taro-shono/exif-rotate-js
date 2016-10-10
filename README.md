@@ -56,7 +56,7 @@ getBase64String(img, options);
 can get base64 encode string.
 
 like this console.log:
-![console](https://cloud.githubusercontent.com/assets/4067007/19226758/92e519fc-8e64-11e6-8fd4-20556ae6dbb8.png)
+
 <img src="https://cloud.githubusercontent.com/assets/4067007/19226758/92e519fc-8e64-11e6-8fd4-20556ae6dbb8.png" width="500">
 
 
