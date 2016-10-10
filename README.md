@@ -34,12 +34,38 @@ ExifRotate.showPreviewImage(img, {
 
 ## METHODS
 
-| Name          | Argument | Description   |
-| ------------- |:--------:|:-------------:|
-| showPreviewImage  | img, Object   | Preview images |
-| getBase64String   | img, Object   | Got encoding base 64 string |
+### showPreviewImage
 
-## OPTIONS
+```js
+showPreviewImage(img, options);
+```
+
+can show preview image.
+
+like this:
+![image](https://cloud.githubusercontent.com/assets/4067007/19226722/fc509f20-8e63-11e6-86a0-392a06ec887d.png)
+
+
+### getBase64String
+
+```js
+getBase64String(img, options);
+```
+
+can get base64 encode string.
+
+like this console.log:
+![console](https://cloud.githubusercontent.com/assets/4067007/19226758/92e519fc-8e64-11e6-8fd4-20556ae6dbb8.png)
+
+
+#### Arguments
+
+| Name          | Type      | Description   |
+| ------------- |:--------:|:-------------:|
+| img           | node      | img element. `new Image();` |
+| options       | Object    | [Method options.](#options) |
+
+#### Options
 
 See `lib/configs.js`
 

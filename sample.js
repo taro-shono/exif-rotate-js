@@ -10,6 +10,7 @@ elem.onchange = (e) => {
         const base64 = ExifRotate.getBase64String(img, {
           max_size: 300,
         });
+        console.log(base64);
 
         ExifRotate.showPreviewImage(img, {
           max_size: 700,
