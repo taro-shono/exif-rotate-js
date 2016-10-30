@@ -2,7 +2,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    sample: ['./sample.js'],
+    index: ['./example/index.js'],
   },
 
   output: {

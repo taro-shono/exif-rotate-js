@@ -1,4 +1,4 @@
-import ExifRotate from './lib/exif-rotate';
+import ExifRotate from '../lib/exif-rotate';
 
 const elem = document.getElementById('file_image');
 elem.onchange = (e) => {
