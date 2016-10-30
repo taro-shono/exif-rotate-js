@@ -9,6 +9,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-param-reassign': 'off',
     'no-shadow': 'off',
+    'no-console': 'off',
   },
   parserOptions: {
     ecmaVersion: 2016,

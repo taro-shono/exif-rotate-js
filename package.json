@@ -4,7 +4,7 @@
   "description": "When you use input file, you can see preview images.",
   "main": "lib/exif-rotate.js",
   "scripts": {
-    "demo": "webpack --watch",
+    "dev": "babel src --out-dir lib --watch & webpack --watch",
     "babel": "babel src --out-dir lib",
     "linter": "eslint --ignore-path .gitignore src/",
     "build": "npm run babel && npm run linter",

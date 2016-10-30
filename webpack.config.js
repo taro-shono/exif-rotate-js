@@ -2,8 +2,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    'exif-rotate': './src/exif-rotate.js',
-    sample: './sample.js',
+    sample: ['./sample.js'],
   },
 
   output: {
@@ -16,7 +15,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: [/node_modules/, /lib/],
-        loaders: ['babel-loader', 'eslint-loader'],
+        loaders: ['babel', 'eslint-loader'],
       },
     ],
   },
