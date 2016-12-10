@@ -3,7 +3,7 @@ import { max_size, default_container_id } from './configs';
 import ImageDoc from './image';
 const image_doc = new ImageDoc();
 
-export default class Helper {
+export default class makeCanvas {
   /**
   *  @param img {elem}
   *  @param canvas {elem}
@@ -155,4 +155,4 @@ export const {
   canvasResizeAndDrawImage,
   rotateFromOrientation,
   appendNewImage,
-} = Helper;
+} = makeCanvas;
