@@ -5,11 +5,16 @@ export default class ExifRotate {
   *  @param img {elem}
   *  @param options {object}
   */
-  static showPreviewImage(img, options = {}) {
+  static showPreviewImage(files, options = {}) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    setCanvas(img, canvas, ctx, options);
-    appendNewImage(canvas, options);
+    setCanvas(files, canvas, ctx, options)
+    .then(() => {
+      appendNewImage(canvas, options);
+    })
+    .catch(() => {
+      console.log('not working showPreviewImage');
+    });
   }
 
   /**
@@ -17,10 +22,16 @@ export default class ExifRotate {
   *  @param options {object}
   *  @return base 64 data url {string}
   */
-  static getBase64String(img, options = {}) {
+  static getBase64String(files, options = {}, callback) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    setCanvas(img, canvas, ctx, options);
-    return canvas.toDataURL('image/jpeg');
+
+    setCanvas(files, canvas, ctx, options)
+    .then(() => {
+      callback(canvas.toDataURL('image/jpeg'));
+    })
+    .catch(() => {
+      console.log('not working getBase64String');
+    });
   }
 }

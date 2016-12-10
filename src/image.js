@@ -1,9 +1,10 @@
 export default class ImageDoc {
   constructor() {
-    this.getItem = this.getItem.bind(this);
+    this.setImage = this.setImage.bind(this);
+    this.readFile = this.readFile.bind(this);
   }
 
-  setItem(src) {
+  setImage(src) {
     const img = new Image();
     return new Promise((resolve, reject) => {
       img.onload = () => {
@@ -16,13 +17,19 @@ export default class ImageDoc {
     });
   }
 
-  getItem(src) {
-    this.setItem(src)
-    .then((img) => {
-      return img;
-    })
-    .catch((error) => {
-      console.log(error);
+  readFile(files) {
+    const reader = new FileReader();
+    return new Promise((resolve, reject) => {
+      Object.keys(files).forEach((index) => {
+        reader.onload = (e) => {
+          return resolve(e.target.result);
+        };
+
+        reader.onerror = (error) => {
+          return reject(console.log(error));
+        };
+        reader.readAsDataURL(files[index]);
+      });
     });
   }
 }
