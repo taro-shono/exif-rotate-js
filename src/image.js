@@ -1,35 +1,26 @@
 export default class ImageDoc {
-  constructor() {
-    this.setImage = this.setImage.bind(this);
-    this.readFile = this.readFile.bind(this);
-  }
-
-  setImage(src) {
+  static setImage(src) {
     const img = new Image();
     return new Promise((resolve, reject) => {
-      img.onload = () => {
-        return resolve(img);
-      };
-      img.onerror = (error) => {
-        return reject(error);
-      }
+      img.onload = () => resolve(img);
+      img.onerror = error => reject(error);
       img.src = src;
     });
   }
 
-  readFile(files) {
+  static readFile(files) {
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
       Object.keys(files).forEach((index) => {
-        reader.onload = (e) => {
-          return resolve(e.target.result);
-        };
-
-        reader.onerror = (error) => {
-          return reject(console.log(error));
-        };
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = error => reject(console.log(error));
         reader.readAsDataURL(files[index]);
       });
     });
   }
 }
+
+export const {
+  setImage,
+  readFile,
+} = ImageDoc;

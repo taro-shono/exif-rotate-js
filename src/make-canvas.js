@@ -1,25 +1,17 @@
 import EXIF from 'exif-js';
 import { max_size } from './configs';
-import ImageDoc from './image';
-const image_doc = new ImageDoc();
+import { setImage, readFile } from './image';
 
 export default class makeCanvas {
   static init(files, options) {
     return new Promise((resolve, reject) => {
-      image_doc.readFile(files)
-      .then((file) => {
-
-        image_doc.setImage(file)
-        .then((img) => {
-          return resolve(getCanvas(img, options));
-        })
-        .catch((error) => {
-          return reject(console.log(error));
-        });
-      })
-      .catch((error) => {
-        return reject(console.log(error));
-      });
+      readFile(files)
+      .then(file =>
+        setImage(file)
+        .then(img => resolve(getCanvas(img, options)))
+        .catch(error => reject(console.log(error)))
+      )
+      .catch(error => reject(console.log(error)));
     });
   }
 
@@ -29,7 +21,7 @@ export default class makeCanvas {
   *  @param ctx {canvas obj}
   *  @param options {object}
   */
-  static getImage(img, options) {
+  static getImage(img) {
     img.re_width = img.width;
     img.re_height = img.height;
     const orientation = getOrientation(img);
@@ -45,7 +37,7 @@ export default class makeCanvas {
   static getCanvas(img, options) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    const new_img = getImage(img, options);
+    const new_img = getImage(img);
     const orientation = getOrientation(new_img);
 
     return canvasResizeAndDrawImage(new_img, canvas, ctx, options);
@@ -74,12 +66,12 @@ export default class makeCanvas {
       canvas.height = size;
       ctx.drawImage(img, 0, 0, resize, size);
       return canvas;
-    } else {
-      canvas.width = size;
-      canvas.height = size;
-      ctx.drawImage(img, 0, 0, size, size);
-      return canvas;
     }
+
+    canvas.width = size;
+    canvas.height = size;
+    ctx.drawImage(img, 0, 0, size, size);
+    return canvas;
   }
 
   /**
