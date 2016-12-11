@@ -52,13 +52,13 @@ Can get base64 encode string.
 
 See `src/configs.js`
 
-### max_size
+#### max_size
 - Type: number
 - Default: 720
 
 This is max image size. Can get the size you want.
 
-### default_container_id
+#### default_container_id
 - Type: string
 - Default: container
 
