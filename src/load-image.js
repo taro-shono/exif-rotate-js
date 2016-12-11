@@ -1,4 +1,4 @@
-export default class ImageDoc {
+export default class LoadImage {
   static setImage(src) {
     const img = new Image();
     return new Promise((resolve, reject) => {
@@ -23,4 +23,4 @@ export default class ImageDoc {
 export const {
   setImage,
   readFile,
-} = ImageDoc;
+} = LoadImage;
