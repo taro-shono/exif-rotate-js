@@ -4,14 +4,14 @@ import ImageDoc from './image';
 const image_doc = new ImageDoc();
 
 export default class makeCanvas {
-  static init(files, canvas, ctx, options) {
+  static init(files, options) {
     return new Promise((resolve, reject) => {
       image_doc.readFile(files)
       .then((file) => {
 
         image_doc.setImage(file)
         .then((img) => {
-          return resolve(setCanvas(img, canvas, ctx, options));
+          return resolve(getCanvas(img, options));
         })
         .catch((error) => {
           return reject(console.log(error));
@@ -29,7 +29,7 @@ export default class makeCanvas {
   *  @param ctx {canvas obj}
   *  @param options {object}
   */
-  static getImage(img, canvas, ctx, options) {
+  static getImage(img, options) {
     img.re_width = img.width;
     img.re_height = img.height;
     const orientation = getOrientation(img);
@@ -42,12 +42,15 @@ export default class makeCanvas {
     return img;
   }
 
-  static setCanvas(img, canvas, ctx, options) {
-    const new_img = getImage(img, canvas, ctx, options);
+  static getCanvas(img, options) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const new_img = getImage(img, options);
     const orientation = getOrientation(new_img);
 
-    canvasResizeAndDrawImage(new_img, canvas, ctx, options);
-    rotateFromOrientation(orientation, new_img, ctx, canvas);
+    return canvasResizeAndDrawImage(new_img, canvas, ctx, options);
+
+    // rotateFromOrientation(orientation, new_img, ctx, canvas);
   }
 
   /**
@@ -64,15 +67,18 @@ export default class makeCanvas {
       canvas.width = size;
       canvas.height = resize;
       ctx.drawImage(img, 0, 0, size, resize);
+      return canvas;
     } else if (img.re_height > img.re_width) {
       const resize = img.re_width * (size / img.re_height);
       canvas.width = resize;
       canvas.height = size;
       ctx.drawImage(img, 0, 0, resize, size);
+      return canvas;
     } else {
       canvas.width = size;
       canvas.height = size;
       ctx.drawImage(img, 0, 0, size, size);
+      return canvas;
     }
   }
 
@@ -148,7 +154,7 @@ export default class makeCanvas {
 export const {
   init,
   getImage,
-  setCanvas,
+  getCanvas,
   getOrientation,
   canvasResizeAndDrawImage,
   rotateFromOrientation,

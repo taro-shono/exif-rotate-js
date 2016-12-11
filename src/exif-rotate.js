@@ -7,11 +7,8 @@ export default class ExifRotate {
   *  @param options {object}
   */
   static showPreviewImage(files, options = {}) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    init(files, canvas, ctx, options)
-    .then(() => {
+    init(files, options)
+    .then((canvas) => {
       const base_64 = canvas.toDataURL('image/jpeg');
       const new_img = new Image();
       new_img.setAttribute('src', base_64);
@@ -30,11 +27,8 @@ export default class ExifRotate {
   *  @return base 64 data url {string}
   */
   static getBase64String(files, options = {}, callback) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    init(files, canvas, ctx, options)
-    .then(() => {
+    init(files, options)
+    .then((canvas) => {
       callback(canvas.toDataURL('image/jpeg'));
     })
     .catch((error) => {
