@@ -29,7 +29,7 @@ export default class makeCanvas {
   *  @param ctx {canvas obj}
   *  @param options {object}
   */
-  static setCanvas(img, canvas, ctx, options) {
+  static getImage(img, canvas, ctx, options) {
     img.re_width = img.width;
     img.re_height = img.height;
     const orientation = getOrientation(img);
@@ -39,9 +39,15 @@ export default class makeCanvas {
       img.re_width = img.height;
     }
 
-    canvasResizeAndDrawImage(img, canvas, ctx, options);
+    return img;
+  }
 
-    rotateFromOrientation(orientation, img, ctx, canvas);
+  static setCanvas(img, canvas, ctx, options) {
+    const new_img = getImage(img, canvas, ctx, options);
+    const orientation = getOrientation(new_img);
+
+    canvasResizeAndDrawImage(new_img, canvas, ctx, options);
+    rotateFromOrientation(orientation, new_img, ctx, canvas);
   }
 
   /**
@@ -141,6 +147,7 @@ export default class makeCanvas {
 
 export const {
   init,
+  getImage,
   setCanvas,
   getOrientation,
   canvasResizeAndDrawImage,
