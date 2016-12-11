@@ -4,14 +4,12 @@ import { setImage, readFile } from './image';
 
 export default class makeCanvas {
   static init(files, options) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       readFile(files)
       .then(file =>
         setImage(file)
-        .then(img => resolve(getCanvas(img, options)))
-        .catch(error => reject(console.log(error)))
-      )
-      .catch(error => reject(console.log(error)));
+        .then(img => resolve(getExifRotateCanvas(img, options)))
+      );
     });
   }
 
@@ -21,7 +19,7 @@ export default class makeCanvas {
   *  @param ctx {canvas obj}
   *  @param options {object}
   */
-  static getImage(img) {
+  static getResizeImage(img) {
     img.re_width = img.width;
     img.re_height = img.height;
     const orientation = getOrientation(img);
@@ -34,43 +32,44 @@ export default class makeCanvas {
     return img;
   }
 
-  static getCanvas(img, options) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const new_img = getImage(img);
-    const orientation = getOrientation(new_img);
+  static getExifRotateCanvas(img, options) {
+    const resizeCanvas = getResizeCanvas(getResizeImage(img), options);
+    const ctx = resizeCanvas.getContext('2d');
 
-    return canvasResizeAndDrawImage(new_img, canvas, ctx, options);
-
-    // rotateFromOrientation(orientation, new_img, ctx, canvas);
+    return getRotateCanvas(
+      getOrientation(img),
+      img,
+      ctx,
+      resizeCanvas
+    );
   }
 
   /**
   *  draw image on canvas
   *  @param img {elem}
-  *  @param canvas {elem}
-  *  @param ctx {canvas obj}
   */
-  static canvasResizeAndDrawImage(img, canvas, ctx, options) {
+  static getResizeCanvas(resizeImage, options) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
     const size = options.max_size ? options.max_size : max_size;
 
-    if (img.re_width > img.re_height) {
-      const resize = img.re_height * (size / img.re_width);
+    if (resizeImage.re_width > resizeImage.re_height) {
+      const resize = resizeImage.re_height * (size / resizeImage.re_width);
       canvas.width = size;
       canvas.height = resize;
-      ctx.drawImage(img, 0, 0, size, resize);
+      ctx.drawImage(resizeImage, 0, 0, size, resize);
       return canvas;
-    } else if (img.re_height > img.re_width) {
-      const resize = img.re_width * (size / img.re_height);
+    } else if (resizeImage.re_height > resizeImage.re_width) {
+      const resize = resizeImage.re_width * (size / resizeImage.re_height);
       canvas.width = resize;
       canvas.height = size;
-      ctx.drawImage(img, 0, 0, resize, size);
+      ctx.drawImage(resizeImage, 0, 0, resize, size);
       return canvas;
     }
 
     canvas.width = size;
     canvas.height = size;
-    ctx.drawImage(img, 0, 0, size, size);
+    ctx.drawImage(resizeImage, 0, 0, size, size);
     return canvas;
   }
 
@@ -94,60 +93,61 @@ export default class makeCanvas {
   *  @param ctx {canvas obj}
   *  @param canvas {elem}
   */
-  static rotateFromOrientation(orientation, img, ctx, canvas) {
+  static getRotateCanvas(orientation, img, ctx, canvas) {
     switch (orientation) {
       case 2:
         // horizontal flip
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
-        break;
+        return canvas;
       case 3:
         // 180° rotate left
         ctx.translate(canvas.width, canvas.height);
         ctx.rotate(Math.PI);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        break;
+        return canvas;
       case 4:
         // vertical flip
         ctx.translate(0, canvas.height);
         ctx.scale(1, -1);
-        break;
+        return canvas;
       case 5:
         // vertical flip + 90 rotate right
         ctx.rotate(0.5 * Math.PI);
         ctx.scale(1, -1);
-        break;
+        return canvas;
       case 6: {
         // 90° rotate right
         ctx.rotate(0.5 * Math.PI);
         ctx.translate(0, -canvas.height);
         const img_ratio = (img.re_height / img.re_width) - 1;
         ctx.drawImage(img, 0, canvas.width * img_ratio, canvas.height, canvas.width);
+        return canvas;
       }
-        break;
       case 7:
         // horizontal flip + 90 rotate right
         ctx.rotate(0.5 * Math.PI);
         ctx.translate(canvas.width, -canvas.height);
         ctx.scale(-1, 1);
-        break;
+        return canvas;
       case 8:
         // 90° rotate left
         ctx.rotate(-0.5 * Math.PI);
         ctx.translate(-canvas.width, 0);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        break;
+        return canvas;
       default:
-        break;
+        return canvas;
     }
   }
 }
 
 export const {
   init,
-  getImage,
+  getExifRotateCanvas,
+  getResizeImage,
   getCanvas,
   getOrientation,
-  canvasResizeAndDrawImage,
-  rotateFromOrientation,
+  getResizeCanvas,
+  getRotateCanvas,
 } = makeCanvas;
