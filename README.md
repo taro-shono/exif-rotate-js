@@ -10,11 +10,13 @@ When you use input file, you can see preview images.
 - use file API, correct to mobile.
 - resize image's file size and size.
 
-## HOW IT'S WORKS
+## HOW DOES IT WORK?
 
 ```
 npm install exif-rotate-js
 ```
+
+exmaple js
 
 ```js
 var ExifRotate = require('exif-rotate-js');
@@ -23,10 +25,10 @@ ExifRotate.showPreviewImage(img, {
 });
 ```
 
-👆show detail `sample.js`
+example html
 
 ```html
-<div id="{options.default_container_id}">
+<div id="${options.default_container_id}">
   here is uploaded images
 </div>
 <input type="file" id="#sum_id" multiple> <!-- can use multiple -->
@@ -69,7 +71,7 @@ like this console.log:
 
 #### Options
 
-See `lib/configs.js`
+See `src/configs.js`
 
 ### max_size
 - Type: number
