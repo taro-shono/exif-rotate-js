@@ -1,4 +1,4 @@
-import { setCanvas, appendNewImage } from './make-canvas';
+import { init, appendNewImage } from './make-canvas';
 
 export default class ExifRotate {
   /**
@@ -8,7 +8,7 @@ export default class ExifRotate {
   static showPreviewImage(files, options = {}) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    setCanvas(files, canvas, ctx, options)
+    init(files, canvas, ctx, options)
     .then(() => {
       appendNewImage(canvas, options);
     })
@@ -26,7 +26,7 @@ export default class ExifRotate {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    setCanvas(files, canvas, ctx, options)
+    init(files, canvas, ctx, options)
     .then(() => {
       callback(canvas.toDataURL('image/jpeg'));
     })

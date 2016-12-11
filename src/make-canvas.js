@@ -4,32 +4,14 @@ import ImageDoc from './image';
 const image_doc = new ImageDoc();
 
 export default class makeCanvas {
-  /**
-  *  @param img {elem}
-  *  @param canvas {elem}
-  *  @param ctx {canvas obj}
-  *  @param options {object}
-  */
-  static setCanvas(files, canvas, ctx, options) {
+  static init(files, canvas, ctx, options) {
     return new Promise((resolve, reject) => {
       image_doc.readFile(files)
       .then((file) => {
-        // return file;
 
         image_doc.setImage(file)
         .then((img) => {
-          img.re_width = img.width;
-          img.re_height = img.height;
-          const orientation = getOrientation(img);
-          if (orientation === 6) {
-            // 縦画像だった場合スマートフォンでは幅・高さは横画像と認識されるため、 width height を手動で入れ替える必要あり
-            img.re_height = img.width;
-            img.re_width = img.height;
-          }
-
-          canvasResizeAndDrawImage(img, canvas, ctx, options);
-
-          return resolve(rotateFromOrientation(orientation, img, ctx, canvas));
+          return resolve(setCanvas(img, canvas, ctx, options));
         })
         .catch((error) => {
           console.log(error);
@@ -38,7 +20,28 @@ export default class makeCanvas {
       .catch((error) => {
         console.log(error);
       });
-    })
+    });
+  }
+
+  /**
+  *  @param img {elem}
+  *  @param canvas {elem}
+  *  @param ctx {canvas obj}
+  *  @param options {object}
+  */
+  static setCanvas(img, canvas, ctx, options) {
+    img.re_width = img.width;
+    img.re_height = img.height;
+    const orientation = getOrientation(img);
+    if (orientation === 6) {
+      // 縦画像だった場合スマートフォンでは幅・高さは横画像と認識されるため、 width height を手動で入れ替える必要あり
+      img.re_height = img.width;
+      img.re_width = img.height;
+    }
+
+    canvasResizeAndDrawImage(img, canvas, ctx, options);
+
+    rotateFromOrientation(orientation, img, ctx, canvas);
   }
 
   /**
@@ -150,6 +153,7 @@ export default class makeCanvas {
 }
 
 export const {
+  init,
   setCanvas,
   getOrientation,
   canvasResizeAndDrawImage,
