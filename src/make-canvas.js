@@ -1,5 +1,5 @@
 import EXIF from 'exif-js';
-import { max_size, default_container_id } from './configs';
+import { max_size } from './configs';
 import ImageDoc from './image';
 const image_doc = new ImageDoc();
 
@@ -14,11 +14,11 @@ export default class makeCanvas {
           return resolve(setCanvas(img, canvas, ctx, options));
         })
         .catch((error) => {
-          console.log(error);
+          return reject(console.log(error));
         });
       })
       .catch((error) => {
-        console.log(error);
+        return reject(console.log(error));
       });
     });
   }
@@ -80,19 +80,6 @@ export default class makeCanvas {
       orientation = EXIF.getTag(img, 'Orientation');
     });
     return orientation;
-  }
-
-  /**
-  *  append container
-  *  @param canvas {elem}
-  */
-  static appendNewImage(canvas, options) {
-    const base_64 = canvas.toDataURL('image/jpeg');
-    const new_img = new Image();
-    new_img.setAttribute('src', base_64);
-    const id = options.container_id ? options.container_id : default_container_id;
-    const container = document.getElementById(id);
-    return container.appendChild(new_img);
   }
 
   /**
@@ -158,5 +145,4 @@ export const {
   getOrientation,
   canvasResizeAndDrawImage,
   rotateFromOrientation,
-  appendNewImage,
 } = makeCanvas;
