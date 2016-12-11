@@ -1,8 +1,13 @@
 import EXIF from 'exif-js';
 import { max_size } from './configs';
-import { setImage, readFile } from './image';
+import { setImage, readFile } from './load-image';
 
 export default class makeCanvas {
+  /**
+  *  get canvas after read file
+  *  @param files {fileList}
+  *  @return promise {func}
+  */
   static init(files, options) {
     return new Promise((resolve) => {
       readFile(files)
@@ -14,17 +19,16 @@ export default class makeCanvas {
   }
 
   /**
+  *  insert resize variable to image
   *  @param img {elem}
-  *  @param canvas {elem}
-  *  @param ctx {canvas obj}
-  *  @param options {object}
+  *  @return img {elem}
   */
   static getResizeImage(img) {
     img.re_width = img.width;
     img.re_height = img.height;
     const orientation = getOrientation(img);
     if (orientation === 6) {
-      // 縦画像だった場合スマートフォンでは幅・高さは横画像と認識されるため、 width height を手動で入れ替える必要あり
+      // it is necessary to manually replace width and height for mobile
       img.re_height = img.width;
       img.re_width = img.height;
     }
@@ -32,6 +36,12 @@ export default class makeCanvas {
     return img;
   }
 
+  /**
+  *  get resize and rotate canvas
+  *  @param img {elem}
+  *  @param options {object}
+  *  @return canvas {elem}
+  */
   static getExifRotateCanvas(img, options) {
     const resizeCanvas = getResizeCanvas(getResizeImage(img), options);
     const ctx = resizeCanvas.getContext('2d');
@@ -45,8 +55,10 @@ export default class makeCanvas {
   }
 
   /**
-  *  draw image on canvas
-  *  @param img {elem}
+  *  get canvas to designate size from original size
+  *  @param resizeImage {elem}
+  *  @param options {object}
+  *  @returns canvas {elem}
   */
   static getResizeCanvas(resizeImage, options) {
     const canvas = document.createElement('canvas');
@@ -76,6 +88,7 @@ export default class makeCanvas {
   /**
   *  get orientation for mobile
   *  @param img {elem}
+  *  @return orientation {number}
   */
   static getOrientation(img) {
     let orientation;
@@ -86,12 +99,12 @@ export default class makeCanvas {
   }
 
   /**
-  *  for mobile
-  *  orientation があった場合に正しい角度で見せるように canvas を使って回転させる
+  *  get rotate canvas for mobile
   *  @param orientation {number}
   *  @param img {elem}
   *  @param ctx {canvas obj}
   *  @param canvas {elem}
+  *  @returns canvas {elem}
   */
   static getRotateCanvas(orientation, img, ctx, canvas) {
     switch (orientation) {
