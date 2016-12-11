@@ -19,7 +19,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.js$/,
-        exclude: [/node_modules/, /lib/],
+        exclude: /node_modules/,
         loader: 'eslint-loader',
       },
     ],
