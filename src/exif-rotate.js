@@ -9,12 +9,14 @@ export default class ExifRotate {
   static showPreviewImage(files, options = {}) {
     init(files, options)
     .then((canvas) => {
-      const base_64 = canvas.toDataURL('image/jpeg');
-      const new_img = new Image();
-      new_img.setAttribute('src', base_64);
-      const id = options.container_id ? options.container_id : default_container_id;
-      const container = document.getElementById(id);
-      container.appendChild(new_img);
+      for (let i = 0; i < canvas.length; i += 1) {
+        const base_64 = canvas[i].toDataURL('image/jpeg');
+        const new_img = new Image();
+        new_img.setAttribute('src', base_64);
+        const id = options.container_id ? options.container_id : default_container_id;
+        const container = document.getElementById(id);
+        container.appendChild(new_img);
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -29,7 +31,9 @@ export default class ExifRotate {
   static getBase64String(files, options = {}, callback) {
     init(files, options)
     .then((canvas) => {
-      callback(canvas.toDataURL('image/jpeg'));
+      for (let i = 0; i < canvas.length; i += 1) {
+        callback(canvas[i].toDataURL('image/jpeg'));
+      }
     })
     .catch((error) => {
       console.log(error);

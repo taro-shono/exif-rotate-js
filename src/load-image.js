@@ -8,14 +8,12 @@ export default class LoadImage {
     });
   }
 
-  static readFile(files) {
-    const reader = new FileReader();
+  static readFile(file) {
     return new Promise((resolve, reject) => {
-      Object.keys(files).forEach((index) => {
-        reader.onload = e => resolve(e.target.result);
-        reader.onerror = error => reject(console.log(error));
-        reader.readAsDataURL(files[index]);
-      });
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.onerror = error => reject(console.log(error));
+      reader.readAsDataURL(file);
     });
   }
 }

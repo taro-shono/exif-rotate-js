@@ -9,13 +9,19 @@ export default class makeCanvas {
   *  @return promise {func}
   */
   static init(files, options) {
-    return new Promise((resolve) => {
-      readFile(files)
-      .then(file =>
-        setImage(file)
-        .then(img => resolve(getExifRotateCanvas(img, options)))
-      );
-    });
+    const tasks = [];
+    for (let i = 0; i < files.length; i += 1) {
+      const task = new Promise((resolve) => {
+        readFile(files[i])
+        .then(file =>
+          setImage(file)
+          .then(img => resolve(getExifRotateCanvas(img, options)))
+        );
+      });
+      tasks.push(task);
+    }
+
+    return Promise.all(tasks).then(canvas => canvas);
   }
 
   /**
