@@ -71,7 +71,7 @@ like this console.log:
 
 #### Options
 
-See `lib/configs.js`
+See `src/configs.js`
 
 ### max_size
 - Type: number
