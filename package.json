@@ -7,10 +7,10 @@
     "dev": "webpack-dev-server",
     "babel": "babel src --out-dir lib",
     "linter": "eslint --ignore-path .gitignore src/",
-    "build": "npm run babel && npm run linter",
+    "build": "yarn run babel && yarn run linter",
     "ava": "ava",
-    "test": "npm run linter && npm run ava",
-    "prepublish": "npm run build"
+    "test": "yarn run linter && yarn run ava",
+    "prepublish": "yarn run build"
   },
   "keywords": [
     "exif"
