@@ -1,10 +1,10 @@
 {
   "name": "exif-rotate-js",
-  "version": "0.0.11",
+  "version": "0.1.1",
   "description": "When you use input file, you can see preview images.",
   "main": "lib/exif-rotate.js",
   "scripts": {
-    "dev": "babel src --out-dir lib --watch & webpack --watch",
+    "dev": "webpack-dev-server",
     "babel": "babel src --out-dir lib",
     "linter": "eslint --ignore-path .gitignore src/",
     "build": "npm run babel && npm run linter",
@@ -35,7 +35,10 @@
     "eslint-config-defaults": "^9.0.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-import": "^2.0.0",
-    "webpack": "^1.13.2"
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.24.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
   },
   "ava": {
     "verbose": true,
