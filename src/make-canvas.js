@@ -13,10 +13,9 @@ export default class makeCanvas {
     for (let i = 0; i < files.length; i += 1) {
       const task = new Promise((resolve) => {
         readFile(files[i])
-        .then(file =>
-          setImage(file)
-          .then(img => resolve(getExifRotateCanvas(img, options)))
-        );
+          .then(file =>
+            setImage(file)
+              .then(img => resolve(getExifRotateCanvas(img, options))));
       });
       tasks.push(task);
     }
@@ -56,7 +55,7 @@ export default class makeCanvas {
       getOrientation(img),
       img,
       ctx,
-      resizeCanvas
+      resizeCanvas,
     );
   }
 
