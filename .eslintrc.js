@@ -7,6 +7,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   env: {
+    es6: true,
     browser: true,
   },
 };
