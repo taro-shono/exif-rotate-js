@@ -6,3 +6,9 @@ export function readFile(file: Blob): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
+
+export async function getDataFromReadFile(files: Blob[]): Promise<string[]> {
+  return await Promise.all(
+    Array.from(files).map((file: Blob) => readFile(file)),
+  );
+}
