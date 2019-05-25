@@ -1,4 +1,4 @@
-import { EXIF } from 'exif-js';
+import * as EXIF from 'exif-js';
 import { getDataFromReadFile } from './readFile';
 import { readImage } from './readImage';
 
@@ -18,39 +18,12 @@ interface canvasOptions {
   };
 }
 
-export async function getCanvas(files: Blob[]): Promise<string[] | undefined> {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  if (!context) {
-    // TODO: error handle
-    return;
-  }
+export async function getImages(files: Blob[]): Promise<HTMLImageElement[]> {
   const datas = await getDataFromReadFile(files);
-  const images = await Promise.all(
-    datas.map(item => {
-      return readImage(item);
-    }),
-  );
-  const base64s = images.map(image => {
-    const orientation = getOrientation(image);
-    const { width, height } = getResizeCanvas(image, orientation);
-    canvas.setAttribute('width', `${width}px`);
-    canvas.setAttribute('height', `${height}px`);
-    const { dx, dy, translate, scale, rotate } = getCanvasOptions(
-      canvas.width,
-      canvas.height,
-      orientation,
-    );
-    context.translate(translate.x, translate.y);
-    context.scale(scale.x, scale.y);
-    context.rotate(rotate.angle);
-    context.drawImage(image, dx, dy);
-    return canvas.toDataURL('image/jpeg');
-  });
-  return base64s;
+  return await Promise.all(datas.map(item => readImage(item)));
 }
 
-function getResizeCanvas(image: HTMLImageElement, orientation: number) {
+export function getResizeCanvas(image: HTMLImageElement, orientation: number) {
   const width = orientation > 4 ? image.height : image.width;
   const height = orientation > 4 ? image.width : image.height;
   return {
@@ -59,15 +32,16 @@ function getResizeCanvas(image: HTMLImageElement, orientation: number) {
   };
 }
 
-function getOrientation(img: HTMLImageElement): number {
+export function getOrientation(img: HTMLImageElement): number {
   let orientation: number = 1;
+  // @ts-ignore not string: https://github.com/exif-js/exif-js/pull/198
   EXIF.getData(img, () => {
     orientation = EXIF.getTag(img, 'Orientation');
   });
   return orientation;
 }
 
-function getCanvasOptions(
+export function getCanvasOptions(
   width: number,
   height: number,
   orientation: number,
