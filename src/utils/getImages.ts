@@ -3,8 +3,6 @@ import { getDataFromReadFile } from './readFile';
 import { readImage } from './readImage';
 
 interface canvasOptions {
-  dx: number;
-  dy: number;
   translate: {
     x: number;
     y: number;
@@ -23,12 +21,28 @@ export async function getImages(files: Blob[]): Promise<HTMLImageElement[]> {
   return await Promise.all(datas.map(item => readImage(item)));
 }
 
-export function getResizeCanvas(image: HTMLImageElement, orientation: number) {
-  const width = orientation > 4 ? image.height : image.width;
-  const height = orientation > 4 ? image.width : image.height;
+export function getSize(width: number, height: number, maxSize?: number) {
+  if (!maxSize) {
+    return {
+      width: width,
+      height: height,
+    };
+  }
+  if (width > height) {
+    return {
+      width: maxSize,
+      height: height * (maxSize / width),
+    };
+  }
+  if (height > width) {
+    return {
+      width: width * (maxSize / height),
+      height: maxSize,
+    };
+  }
   return {
-    width,
-    height,
+    width: maxSize,
+    height: maxSize,
   };
 }
 
@@ -47,8 +61,6 @@ export function getCanvasOptions(
   orientation: number,
 ): canvasOptions {
   const options: canvasOptions = {
-    dx: 0,
-    dy: 0,
     translate: {
       x: 0,
       y: 0,
