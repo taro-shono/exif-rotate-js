@@ -1,6 +1,7 @@
 import * as EXIF from 'exif-js';
 import { getDataFromReadFile } from './readFile';
 import { readImage } from './readImage';
+import { defaultOptions } from '../options';
 
 interface canvasOptions {
   translate: {
@@ -21,13 +22,11 @@ export async function getImages(files: Blob[]): Promise<HTMLImageElement[]> {
   return await Promise.all(datas.map(item => readImage(item)));
 }
 
-export function getSize(width: number, height: number, maxSize?: number) {
-  if (!maxSize) {
-    return {
-      width: width,
-      height: height,
-    };
-  }
+export function getSize(
+  width: number,
+  height: number,
+  maxSize: number = defaultOptions.maxSize,
+) {
   if (width > height) {
     return {
       width: maxSize,
