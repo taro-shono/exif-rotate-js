@@ -1,65 +1,41 @@
-[![Build Status](https://travis-ci.org/hanagejet/exif-rotate-js.svg?branch=master)](https://travis-ci.org/hanagejet/exif-rotate-js)
+# exif-rotate-js ・ [![CircleCI](https://circleci.com/gh/hanagejet/exif-rotate-js.svg?style=svg)](https://circleci.com/gh/hanagejet/exif-rotate-js)
 
-# exif-rotate-js
+When you use input file, you can get base64 string as array without worrying about `orientation` of exif.
 
-When you use input file, you can see preview images.
-
-## WHAT'S THIS MODULE
-
-- preview on file upload images.
-- use file API, correct to mobile.
-- resize image's file size and size.
-
-## HOW DOES IT WORK?
+## Usage
 
 ```
-npm install exif-rotate-js
+$ npm install exif-rotate-js
 ```
 
-When you need detail, please see [example page](https://github.com/hanagejet/exif-rotate-js/tree/master/example).
+## getBase64Strings(files, {maxSize})
 
-## METHODS
+### `return`
 
-### showPreviewImage
+`return` is string of base64 array like `["data:image/jpeg;base64,/9j/4AAQS..."]`
+
+### `files`
+
+`files` is input target files. User can select multiple files.
+
+### `maxSize`
+
+default: 720
+
+`maxSize` is canvas max size. When image's width is greater than height, `maxSize` applies to width. And vice versa.
+
+## Example
 
 ```js
-showPreviewImage(file, options);
+import { getBase64Strings } from 'exif-rotate-js/lib';
+
+const elem = document.getElementById('fileImage');
+
+if (elem) {
+  elem.onchange = async e => {
+    if (!e.target) return;
+    const data = await getBase64Strings(e.target.files, { maxSize: 1024 });
+    console.log(data); // ["data:image/jpeg;base64,/9j/4AAQS..."] as type of Array
+  };
+}
 ```
-
-Can show preview image.
-
-<img src="https://cloud.githubusercontent.com/assets/4067007/19226722/fc509f20-8e63-11e6-86a0-392a06ec887d.png" width="320">
-
-
-### getBase64String
-
-```js
-getBase64String(file, options);
-```
-
-Can get base64 encode string.
-
-<img src="https://cloud.githubusercontent.com/assets/4067007/19226758/92e519fc-8e64-11e6-8fd4-20556ae6dbb8.png" width="500">
-
-### Arguments
-
-| Name          | Type      | Description   |
-| ------------- |:--------:|:-------------:|
-| file          | fileList  | Just write event target files when input file event |
-| options       | Object    | [Method options.](#options) |
-
-### Options
-
-See `src/configs.js`
-
-#### max_size
-- Type: number
-- Default: 720
-
-This is max image size. Can get the size you want.
-
-#### default_container_id
-- Type: string
-- Default: container
-
-This is container element id that is append preview image.
