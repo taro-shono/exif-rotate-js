@@ -1,12 +1,13 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.15.3
+
 version: 2
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.15.3
-
-    working_directory: ~/src
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
@@ -27,3 +28,29 @@ jobs:
       - run: npm run lint:js
       - run: npm run test
       - run: npm run build
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - 'b0:b1:14:bd:b1:83:74:54:5f:8e:fa:9f:7f:35:68:d4'
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: ~/repo/.circleci/publish-and-tagging.sh
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
