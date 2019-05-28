@@ -1,4 +1,10 @@
-## v1.0.0
+## v1.0.1 [#15](https://github.com/hanagejet/exif-rotate-js/pull/15)
+
+### Feature
+
+- Add auto deploy with shell script on circle ci
+
+# v1.0.0 [#14](https://github.com/hanagejet/exif-rotate-js/pull/14)
 
 ### Update
 
