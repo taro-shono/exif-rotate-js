@@ -1,4 +1,10 @@
-## v1.0.0
+## v1.0.1
+
+### Feature
+
+- Add auto deploy with circleci
+
+# v1.0.0
 
 ### Update
 

@@ -1,12 +1,11 @@
 version: 2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.15.3
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.15.3
-
-    working_directory: ~/src
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
@@ -16,14 +15,42 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
       - run: npm install
-
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: npm run lint:js
-      - run: npm run test
-      - run: npm run build
+      - run:
+          name: Run lint
+          command: npm run lint:js
+      - run:
+          name: Run test
+          command: npm test
+      - run:
+          name: Run build
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
