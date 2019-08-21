@@ -1,3 +1,9 @@
+## v1.0.2
+
+### Feature
+
+- Update getBase64Strings.ts to fix portrait image display issue [#57](https://github.com/hanagejet/exif-rotate-js/pull/57)
+
 ## v1.0.1
 
 ### Feature
