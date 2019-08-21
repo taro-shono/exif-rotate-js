@@ -33,15 +33,15 @@ export const getBase64Strings = async (
     context.translate(translate.x, translate.y);
     context.scale(scale.x, scale.y);
     context.rotate(rotate.angle);
-    
+
     // exif orientation values > 4 correspond to portrait orientation.
     // width and height parameters must be swapped for landscape to ensure correct image display
     if (orientation > 4) {
-      context.drawImage(img, 0, 0, height, width);
+      context.drawImage(image, 0, 0, height, width);
     } else {
-      context.drawImage(img, 0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
     }
-    
+
     return canvas.toDataURL('image/jpeg');
   });
   return base64s;
