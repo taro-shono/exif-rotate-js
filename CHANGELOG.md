@@ -1,3 +1,9 @@
+## v1.0.3
+
+### Feature
+
+- add prepublish [#57](https://github.com/hanagejet/exif-rotate-js/pull/57)
+
 ## v1.0.2
 
 ### Feature
