@@ -1,3 +1,9 @@
+## v1.1.0
+
+### Feature
+
+- Update logic of getSize(). When masSize is higher than image size, use default size [#114](https://github.com/hanagejet/exif-rotate-js/pull/114)
+
 ## v1.0.3
 
 ### Feature
