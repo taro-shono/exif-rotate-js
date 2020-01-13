@@ -27,21 +27,23 @@ export function getSize(
   height: number,
   maxSize: number = defaultOptions.maxSize,
 ) {
+  const parseWidth = maxSize < width ? maxSize : width;
+  const parseHeight = maxSize < height ? maxSize : height;
   if (width > height) {
     return {
-      width: maxSize,
-      height: height * (maxSize / width),
+      width: parseWidth,
+      height: height * (parseWidth / width),
     };
   }
   if (height > width) {
     return {
-      width: width * (maxSize / height),
-      height: maxSize,
+      width: width * (parseHeight / height),
+      height: parseHeight,
     };
   }
   return {
-    width: maxSize,
-    height: maxSize,
+    width: parseWidth,
+    height: parseHeight,
   };
 }
 
