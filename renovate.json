@@ -1,9 +1,10 @@
 {
   "extends": ["config:base"],
-  "packageRules": [
-    {
-      "updateTypes": ["patch", "pin", "digest"],
-      "automerge": true
-    }
-  ]
+  "patch": {
+    "automerge": true,
+    "groupName": "patch dependencies"
+  },
+  "minor": {
+    "groupName": "minor dependencies"
+  }
 }
