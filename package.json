@@ -14,11 +14,11 @@
     "exif-js": "^2.3.0"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.8.7",
-    "@babel/preset-typescript": "7.8.3",
+    "@babel/preset-env": "7.9.0",
+    "@babel/preset-typescript": "7.9.0",
     "@types/jest": "25.1.4",
-    "@typescript-eslint/eslint-plugin": "2.23.0",
-    "@typescript-eslint/parser": "2.23.0",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "@typescript-eslint/parser": "2.24.0",
     "babel-jest": "25.1.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.0",
