@@ -19,7 +19,7 @@ interface canvasOptions {
 
 export async function getImages(files: Blob[]): Promise<HTMLImageElement[]> {
   const datas = await getDataFromReadFile(files);
-  return await Promise.all(datas.map(item => readImage(item)));
+  return await Promise.all(datas.map((item) => readImage(item)));
 }
 
 export function getSize(

@@ -16,7 +16,7 @@ export const getBase64Strings = async (
     throw new Error('canvas can not created');
   }
   const images = await getImages(files);
-  const base64s = images.map(image => {
+  const base64s = images.map((image) => {
     const orientation = getOrientation(image);
     const { width, height } = getSize(
       orientation > 4 ? image.height : image.width,
