@@ -1,6 +1,13 @@
+## v1.2.0
+
+### Feature
+
+- Support browser orientation [#165](https://github.com/hanagejet/exif-rotate-js/pull/165)
+- Update npm some packages
+
 ## v1.1.1
 
-### Patch
+### Fix
 
 - Update npm packages [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.1.0...v1.1.1)
 - Fix security vulnerability [#120](https://github.com/hanagejet/exif-rotate-js/pull/120)
