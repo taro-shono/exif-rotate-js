@@ -5,6 +5,7 @@ import {
   getCanvasOptions,
 } from './utils/getImages';
 import { TOptions, defaultOptions } from './options';
+import { getBrowserOrientation } from './utils/getBrowserOrientation';
 
 export const getBase64Strings = async (
   files: Blob[],
@@ -16,6 +17,19 @@ export const getBase64Strings = async (
     throw new Error('canvas can not created');
   }
   const images = await getImages(files);
+
+  const hasBrowserOrientation = await getBrowserOrientation();
+  if (hasBrowserOrientation) {
+    const base64s = images.map((image) => {
+      const { width, height } = getSize(image.width, image.height, maxSize);
+      canvas.setAttribute('width', `${width}px`);
+      canvas.setAttribute('height', `${height}px`);
+      context.drawImage(image, 0, 0, width, height);
+      return canvas.toDataURL('image/jpeg');
+    });
+    return base64s;
+  }
+
   const base64s = images.map((image) => {
     const orientation = getOrientation(image);
     const { width, height } = getSize(
