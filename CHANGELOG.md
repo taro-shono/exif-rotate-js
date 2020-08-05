@@ -1,3 +1,10 @@
+## v1.2.1
+
+### Feature
+
+- Update npm packages [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.2.0...v1.2.1)
+- Bump lodash from 4.17.14 to 4.17.19 [#207](https://github.com/hanagejet/exif-rotate-js/pull/207)
+
 ## v1.2.0
 
 ### Feature
