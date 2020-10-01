@@ -8,7 +8,7 @@ When you use input file, you can get base64 string as array without worrying abo
 $ npm install exif-rotate-js
 ```
 
-## getBase64Strings(files, {maxSize})
+## getBase64Strings(files, {maxSize, type})
 
 ### `return`
 
@@ -23,6 +23,12 @@ $ npm install exif-rotate-js
 default: 720
 
 `maxSize` is canvas max size. When image's width is greater than height, `maxSize` applies to width. And vice versa.
+
+### `type`
+
+default: 'image/jpeg'
+
+`type` is the mime type of the generated image. Any mime type supported by [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Syntax) is supported.
 
 ## Example
 
