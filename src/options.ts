@@ -1,6 +1,6 @@
 export interface TOptions {
   maxSize?: number;
-  type?: string;
+  type?: 'image/png' | 'image/jpeg' | 'image/webp';
 }
 
 export const defaultOptions = {
