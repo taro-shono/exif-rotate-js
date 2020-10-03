@@ -9,7 +9,10 @@ import { getBrowserOrientation } from './utils/getBrowserOrientation';
 
 export const getBase64Strings = async (
   files: Blob[],
-  { maxSize = defaultOptions.maxSize }: TOptions = {},
+  {
+    maxSize = defaultOptions.maxSize,
+    type = defaultOptions.type,
+  }: TOptions = {},
 ): Promise<string[]> => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
@@ -25,7 +28,7 @@ export const getBase64Strings = async (
       canvas.setAttribute('width', `${width}px`);
       canvas.setAttribute('height', `${height}px`);
       context.drawImage(image, 0, 0, width, height);
-      return canvas.toDataURL('image/jpeg');
+      return canvas.toDataURL(type);
     });
     return base64s;
   }
@@ -56,7 +59,7 @@ export const getBase64Strings = async (
       context.drawImage(image, 0, 0, width, height);
     }
 
-    return canvas.toDataURL('image/jpeg');
+    return canvas.toDataURL(type);
   });
   return base64s;
 };
