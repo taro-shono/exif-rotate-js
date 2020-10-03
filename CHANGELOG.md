@@ -1,8 +1,15 @@
+## v1.3.0
+
+### Feature
+
+- Add type option [#244](https://github.com/hanagejet/exif-rotate-js/pull/244). Thanks [@michellocana](https://github.com/michellocana)
+- Update npm packages by renovate [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.2.0...v1.3.0)
+
 ## v1.2.1
 
 ### Feature
 
-- Update npm packages [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.2.0...v1.2.1)
+- Update npm packages by renovate [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.2.0...v1.2.1)
 - Bump lodash from 4.17.14 to 4.17.19 [#207](https://github.com/hanagejet/exif-rotate-js/pull/207)
 
 ## v1.2.0
@@ -16,7 +23,7 @@
 
 ### Fix
 
-- Update npm packages [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.1.0...v1.1.1)
+- Update npm packages by renovate [compare](https://github.com/hanagejet/exif-rotate-js/compare/v1.1.0...v1.1.1)
 - Fix security vulnerability [#120](https://github.com/hanagejet/exif-rotate-js/pull/120)
   - related [#108](https://github.com/hanagejet/exif-rotate-js/pull/108)
 
