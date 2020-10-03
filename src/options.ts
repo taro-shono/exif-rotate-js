@@ -6,4 +6,4 @@ export interface TOptions {
 export const defaultOptions = {
   maxSize: 720,
   type: 'image/jpeg',
-};
+} as const;
