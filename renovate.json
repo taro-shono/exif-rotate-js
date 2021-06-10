@@ -6,5 +6,11 @@
   },
   "minor": {
     "groupName": "minor dependencies"
-  }
+  },
+  "packageRules": [
+    {
+      "groupName": "jest",
+      "packageNames": ["ts-jest", "jest", "@types/jest"]
+    },
+  ]
 }
