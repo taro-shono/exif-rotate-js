@@ -11,6 +11,6 @@
     {
       "groupName": "jest",
       "packageNames": ["ts-jest", "jest", "@types/jest"]
-    },
+    }
   ]
 }
