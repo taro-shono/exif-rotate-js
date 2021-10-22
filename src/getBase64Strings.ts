@@ -11,6 +11,7 @@ export const getBase64Strings = async (
   files: Blob[],
   {
     maxSize = defaultOptions.maxSize,
+    quality = defaultOptions.quality,
     type = defaultOptions.type,
   }: TOptions = {},
 ): Promise<string[]> => {
@@ -28,7 +29,7 @@ export const getBase64Strings = async (
       canvas.setAttribute('width', `${width}px`);
       canvas.setAttribute('height', `${height}px`);
       context.drawImage(image, 0, 0, width, height);
-      return canvas.toDataURL(type);
+      return canvas.toDataURL(type, quality);
     });
     return base64s;
   }
@@ -59,7 +60,7 @@ export const getBase64Strings = async (
       context.drawImage(image, 0, 0, width, height);
     }
 
-    return canvas.toDataURL(type);
+    return canvas.toDataURL(type, quality);
   });
   return base64s;
 };
