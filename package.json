@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "lint:js": "eslint './src/**/*'",
     "test": "jest"
