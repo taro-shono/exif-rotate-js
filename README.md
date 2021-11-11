@@ -8,7 +8,7 @@ When you use input file, you can get base64 string as array without worrying abo
 $ npm install exif-rotate-js
 ```
 
-## getBase64Strings(files, {maxSize, type})
+## getBase64Strings(files, {maxSize, type, quality})
 
 ### `return`
 
@@ -29,6 +29,12 @@ default: 720
 default: 'image/jpeg'
 
 `type` is the mime type of the generated image. Any mime type supported by [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL#Syntax) is supported.
+
+### `quality`
+
+default: undefined
+
+`quality` is a number between `0` and `1` indicating the image quality to use for image formats that use lossy compression such as `image/jpeg` and `image/webp`. If this argument is anything else, the default value for image quality is used. As per the spec, the default (`undefined`) value will use `0.92`.
 
 ## Example
 
