@@ -1,11 +1,8 @@
 {
-  "include": ["./src/**/*"],
   "compilerOptions": {
     "declaration": true,
-    "target": "esnext",
-    "module": "commonjs",
     "lib": ["dom", "es2020"],
-    "strict": true,
-    "outDir": "./lib"
-  }
+    "strict": true
+  },
+  "include": ["./src/**/*"]
 }

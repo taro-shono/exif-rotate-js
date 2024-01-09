@@ -28,7 +28,7 @@ const data = await getBase64Strings(files, {maxSize, type, quality}))
 ## Example
 
 ```js
-import { getBase64Strings } from 'exif-rotate-js/lib';
+import { getBase64Strings } from 'exif-rotate-js';
 
 const elem = document.getElementById('fileImage');
 
