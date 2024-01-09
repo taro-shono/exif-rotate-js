@@ -1,0 +1,11 @@
+changelog:
+  categories:
+    - title: Update
+      labels:
+        - '*'
+      exclude:
+        labels:
+          - Renovate
+    - title: Dependencies
+      labels:
+        - Renovate
